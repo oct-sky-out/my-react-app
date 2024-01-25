@@ -1,15 +1,15 @@
-import ReactDOMServer from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
-import { Router } from "./Router";
+import ReactDOMServer from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
+import { Router } from './Router';
 
 interface IRenderProps {
-  path: string;
+	path: string;
 }
 
 export const render = ({ path }: IRenderProps) => {
-  return ReactDOMServer.renderToString(
-    <StaticRouter location={path}>
-      <Router />
-    </StaticRouter>
-  );
+	return ReactDOMServer.renderToString(
+		<StaticRouter location={path}>
+			<Router />
+		</StaticRouter>
+	);
 };

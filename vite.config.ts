@@ -5,6 +5,9 @@ import vercel from 'vite-plugin-vercel';
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [react(), vercel()],
+	build: {
+		target: 'esnext',
+	},
 	ssr: {
 		noExternal: [
 			// MUI needs to be pre-processed by Vite in production: https://github.com/brillout/vite-plugin-ssr/discussions/901
