@@ -28,6 +28,7 @@
     "react-router-dom": "^6.21.3",
     "sirv": "^2.0.4",
     "styled-components": "^6.1.8",
+    "vite-plugin-ssr": "^0.4.142",
     "vite-plugin-vercel": "^3.0.1"
   },
   "devDependencies": {
