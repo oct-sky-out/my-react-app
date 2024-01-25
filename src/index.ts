@@ -2,22 +2,22 @@
 import fs from 'fs';
 import path from 'path';
 import express from 'express';
-import { createServer as createViteServer } from 'vite';
+import { ViteDevServer, createServer as createViteServer } from 'vite';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const Port = process.env.PORT || 3000;
 const Base = process.env.BASE || '/';
 
 const templateHtml = isProduction
-	? fs.readFileSync('./dist/client/index.html', 'utf-8')
+	? fs.readFileSync('../dist/client/index.html', 'utf-8')
 	: '';
 
 const ssrManifest = isProduction
-	? await fs.readFileSync('./dist/client/.vite/ssr-manifest.json', 'utf-8')
+	? await fs.readFileSync('../dist/client/.vite/ssr-manifest.json', 'utf-8')
 	: undefined;
 
 const app = express();
-let vite;
+let vite: ViteDevServer | null;
 
 // ? Add vite or respective production middlewares
 if (!isProduction) {
@@ -56,7 +56,7 @@ app.use('*', async (req, res, next) => {
 			render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
 		} else {
 			template = templateHtml;
-			render = (await import('./dist/server/entry-server.js')).render;
+			render = (await import('../dist/server/entry-server.js')).render;
 		}
 
 		const rendered = await render({ path: req.originalUrl }, ssrManifest);
